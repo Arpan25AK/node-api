@@ -32,3 +32,19 @@ const saveUser = (id, name, email, position) => {
   users.push(user)
   return user
 }
+
+const updateUserById = (id, name, email, position) =>{
+  const i = users.findIndex(u => u.id === id)
+  if (i === -1) return "user not found"
+  users[i] = new User(id, name, email, position)
+  return users[i]
+}
+
+const removeUser = (id) =>{
+  const i = users.findIndex( u => u.id === id)
+  if(i === -1) return "user not found"
+  return users.splice(i,1)[0]
+}
+
+
+module.exports = {findAll, findById, findByName, findByEmail, findByPost, findByPostAndName, saveUser, updateUserById, removeUser}
