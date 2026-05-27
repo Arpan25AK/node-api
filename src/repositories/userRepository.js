@@ -36,7 +36,7 @@ const saveUser = (id, name, email, position) => {
 const updateUserById = (id, name, email, position) =>{
   const i = users.findIndex(u => u.id === Number(id))
   if (i === -1) return "user not found"
-  users[i] = new User(id, name, email, position)
+  users[i] = new User(Number(id), name, email, position)
   return users[i]
 }
 
