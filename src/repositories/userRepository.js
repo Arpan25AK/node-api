@@ -28,7 +28,7 @@ const findByPostAndName = (position, name) =>{
 }
 
 const saveUser = (id, name, email, position) => {
-  const user = new User(id, name, email, position)
+  const user = new User(Number(id), name, email, position)
   users.push(user)
   return user
 }
