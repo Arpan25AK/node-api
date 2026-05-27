@@ -8,7 +8,7 @@ const findAll = () =>{
 }
 
 const findById = (id) => { 
-  return users.find( u => u.id === id)
+  return users.find( u => u.id === Number(id))
 }
 
 const findByName = (name) => {
@@ -34,14 +34,14 @@ const saveUser = (id, name, email, position) => {
 }
 
 const updateUserById = (id, name, email, position) =>{
-  const i = users.findIndex(u => u.id === id)
+  const i = users.findIndex(u => u.id === Number(id))
   if (i === -1) return "user not found"
   users[i] = new User(id, name, email, position)
   return users[i]
 }
 
 const removeUser = (id) =>{
-  const i = users.findIndex( u => u.id === id)
+  const i = users.findIndex( u => u.id === Number(id))
   if(i === -1) return "user not found"
   return users.splice(i,1)[0]
 }
