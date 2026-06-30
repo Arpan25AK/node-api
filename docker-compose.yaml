@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: node_api_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: baldhero
+      POSTGRES_PASSWORD: bald
+      POSTGRES_DB: node_api
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  pgdata:
+    
