@@ -28,18 +28,21 @@ router.get("/users/postAndName", async(req, res) => {
 })
 
 router.get("/users/:id", async (req, res) => {
-  const result = await userService.findById(req.params.id)
+  const id = parseInt(req.params.id)
+  const result = await userService.findById(id)
   res.json(result)
 })
 
 router.delete("/users/:id", async (req, res) => {
-  const result = await userService.removeUser(req.params.id)
+  const id = parseInt(req.params.id)
+  const result = await userService.removeUser(id)
   res.json(result)
 })
 
 router.put("/users/:id", async (req, res) => {
   const { name, email, position } = req.body
-  const result = await userService.updateUserById(req.params.id, name, email, position)
+  const id = parseInt(req.params.id)
+  const result = await userService.updateUserById(id, name, email, position)
   res.json(result)
 })
 
