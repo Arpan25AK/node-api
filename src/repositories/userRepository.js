@@ -1,49 +1,41 @@
-const User = require('../models/user')
+const {PrismaClient} = require('../generated/prisma')
+const prisma = new PrismaClient()
 
-
-const users = []
 
 const findAll = () =>{
-  return users
+  return prisma.user.findMany()
 }
 
 const findById = (id) => { 
-  return users.find( u => u.id === Number(id))
+  return prisma.user.findUnique({where : {id}})
 }
 
 const findByName = (name) => {
-  return users.find(u => u.name === name)
+  return prisma.user.findMany({where : {name}})
 }
 
 const findByEmail = (email) =>{
-  return users.find(u => u.email === email)
+  return prisma.user.findUnique({where : {email}})
 }
 
 const findByPost = (position) => {
-  return users.filter(u => u.position === position)
+  return prisma.user.findMany({where : {position}})
 }
 
 const findByPostAndName = (position, name) =>{
-  return users.filter( u => u.position === position && u.name === name)
+  return prisma.user.findMany({where : {position, name}})
 }
 
 const saveUser = (id, name, email, position) => {
-  const user = new User(Number(id), name, email, position)
-  users.push(user)
-  return user
+  return prisma.user.create({data: {id, name, email, position}})
 }
 
 const updateUserById = (id, name, email, position) =>{
-  const i = users.findIndex(u => u.id === Number(id))
-  if (i === -1) return "user not found"
-  users[i] = new User(Number(id), name, email, position)
-  return users[i]
+  return prisma.user.update({where : {id}, data: {id, name, email, position}})
 }
 
 const removeUser = (id) =>{
-  const i = users.findIndex( u => u.id === Number(id))
-  if(i === -1) return "user not found"
-  return users.splice(i,1)[0]
+  return prisma.user.delete({where : {id}})
 }
 
 
